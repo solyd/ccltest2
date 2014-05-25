@@ -9,4 +9,8 @@
                #:usocket
                #:log4cl)
   :components ((:file "package")
-               (:file "ccltest2")))
+               (:file "ccltest2")
+               (:file "intro")
+               (:file "basic-collections")
+               (:file "unit-test")
+               (:file "clos")))
