@@ -8,7 +8,7 @@
   (format t "hello, ~a" name))
 
 
-(defmacro myalias (this &body body)
+(defmacro alias-this (this &body body)
   `(let ((this ,this))
      ,@body))
 
@@ -23,3 +23,9 @@
 ;;can take an arbitrary number of arguments, which are collected into
 ;;a single list that becomes the value of the variable whose name
 ;;follows the &rest.
+
+
+(defun foo (x)
+  (let ((mvar 10))
+    (break)
+    (format t "~a ~a~%" x mvar)))

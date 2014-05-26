@@ -342,9 +342,9 @@
 ;; ================================================================================
 
 (defclass LogEntry ()
-  ((time :initform nil :initarg :time :accessor LogEntry-time)
-   (level :initform nil :initarg :level :accessor LogEntry-level)
-   (entry :initform nil :initarg :entry :accessor LogEntry-entry)))
+  ((time 	:initform nil :initarg :time 	:accessor LogEntry-time)
+   (level 	:initform nil :initarg :level 	:accessor LogEntry-level)
+   (entry 	:initform nil :initarg :entry 	:accessor LogEntry-entry)))
 
 (defmethod print-object ((log-entry LogEntry) (stream stream))
   (with-slots (time level entry) log-entry

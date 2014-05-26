@@ -73,10 +73,10 @@
        collect `(cons ,(stringify-key key) ,(transform-primitive value)) into pairs
        finally (return `(create-json-hash-table ,@pairs)))))
 
-(defvar *previous-readtables* nil)
 
 ;; The readtable is an object that stores the association between
 ;; characters and their reader macro functions, if any.
+(defvar *previous-readtables* nil)
 
 (defmacro enable-json-syntax ()
   '(eval-when (:compile-toplevel :load-toplevel :execute)

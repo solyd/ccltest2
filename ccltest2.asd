@@ -7,12 +7,14 @@
   :license "Specify license here"
   :depends-on (#:bordeaux-threads
                #:usocket
-               #:log4cl)
+               #:log4cl
+               #:local-time
+               #:cl-fad)
   :components ((:file "package")
                (:file "ccltest2")
                (:file "intro")
                (:file "basic-collections")
-               (:file "unit-test")
                (:file "clos")
                (:file "json-reader")
-               (:file "fileio")))
+               (:file "fileio")
+               (:file "error-handling")))
