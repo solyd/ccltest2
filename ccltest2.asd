@@ -13,4 +13,6 @@
                (:file "intro")
                (:file "basic-collections")
                (:file "unit-test")
-               (:file "clos")))
+               (:file "clos")
+               (:file "json-reader")
+               (:file "fileio")))
