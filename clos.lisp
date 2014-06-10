@@ -53,6 +53,33 @@
 (defmethod foo-a :after ((a1 A1))
   (log:info ""))
 
+;; ================================================================================
+
+(defmacro while (test &body body)
+  `(do ()
+       ((not ,test))
+     ,@body))
+
+(defun instance-of-chain (obj)
+  (let ((instance-of-list '())
+        (curr-class (class-of obj))
+        (prev-class nil))
+    (while (not (eql curr-class prev-class))
+         (setf prev-class curr-class)
+         (setf curr-class (class-of curr-class))
+         (push prev-class instance-of-list))
+    instance-of-list))
+
+;; (defun inherits-from-chain (obj)
+;;   (let ((inherits-from-list '())
+;;         (curr-class (class-of obj))
+;;         (prev-class nil))
+;;     (while (not (eql curr-class prev-class))
+;;          (setf prev-class curr-class)
+;;          (setf curr-class (class-of curr-class))
+;;          (push prev-class inherits-from-list))
+;;     inherits-from-list))
+
 
 ;; ================================================================================
 

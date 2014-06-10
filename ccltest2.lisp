@@ -421,3 +421,55 @@
   (handler-bind ((malformed-log-entry-error #'skip-log-entry))
     (dolist (log *log-files*)
       (analyze-log log))))
+
+
+;; ================================================================================
+
+(defmacro foomac (code)
+  (pprint code))
+
+(defun foo (&rest args)
+  (format t "foo ~a~%" args))
+
+(defun bar (&rest args)
+  (format t "bar ~a~%" args))
+
+(defmacro foo-to-bar (expr)
+  (loop :for ele :in expr :collect
+     (if (atom ele)
+         (if (eql ele 'foo) 'bar ele)
+         (foo-to-bar ele))))
+
+(defmacro replace-function (orig-f new-f &body body)
+  `(progn
+     ,@(loop :for expression :in body :collect
+          (if (atom expression)
+              (if (eql expression orig-f) new-f expression)
+              (replace-function orig-f new-f expression)))))
+
+(defmacro replace-function-expression (orig-f new-f expression)
+
+  (cond ((atom expression) (if (eql expression orig-f) new-f expression))
+        ((listp expression) `(loop :for ele :in expression :collect ,@(replace-function-expression ele)))))
+
+(defmacro replace-function (orig-f new-f &body body)
+  `(progn
+     ,@(loop :for expression :in body :collect
+          (if (listp expression)
+              (if (eql (first expression) orig-f)
+                  `(,new-f ,@(replace-function orig-f new-f (rest expression)))
+                  `(,@(replace-function orig-f new-f (rest expression))))
+              expression))))
+
+
+(defmacro blat (&body body)
+  `(progn ,@(loop :for exp :in body :collect exp)))
+
+
+(defmacro check (&body forms)
+  `(progn
+     ,@(loop for f in forms collect `(report-result ,f ',f))))
+
+
+(defmacro tmp (&body body)
+  body)
